@@ -2,135 +2,109 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Untuk Orang Kopo 💗</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <!-- ================= BACKGROUND MUSIC ================= -->
-  <audio id="bgMusic" loop>
-    <source src="assets/video/romantic.mp3" type="audio/mpeg">
-  </audio>
+<!-- ================= BACKGROUND MUSIC ================= -->
+<audio id="bgMusic" loop>
+  <source src="assets/video/romantic.mp3" type="audio/mpeg">
+</audio>
 
-  <!-- ================= PAGE 1 ================= -->
-  <!-- Larangan Klik -->
-  <section id="page1" class="page active">
-    <div class="content">
-      <h1>JANGAN KLIK TOMBOL INI!!</h1>
-      <button id="btn-warning" class="btn danger">JANGAN KLIK</button>
-    </div>
-  </section>
+<!-- ================= PAGE 1 ================= -->
+<section id="page1" class="page active">
+  <div class="content">
+    <h1>JANGAN KLIK TOMBOL INI!!</h1>
+    <button id="btn-warning" class="btn danger">JANGAN KLIK</button>
+  </div>
+</section>
 
-  <!-- ================= PAGE 2 ================= -->
-  <!-- EH MALAH DI KLIK -->
-  <section id="page2" class="page">
-    <div class="content">
-      <h1>EH MALAH DI KLIK 😭</h1>
-      <p>yaudah next...</p>
-      <button class="btn">HEEH SOK PENCET</button>
-    </div>
-  </section>
+<!-- ================= PAGE 2 ================= -->
+<section id="page2" class="page">
+  <div class="content">
+    <h1>EH MALAH DI KLIK 😭</h1>
+    <button class="btn">NEXT</button>
+  </div>
+</section>
 
-  <!-- ================= PAGE 3 ================= -->
-  <!-- Pertanyaan -->
-  <section id="page3" class="page">
-    <div class="content">
-      <h1>Tempat apa yang barusan di kunjungi?</h1>
-      <div class="options">
-        <button class="btn option" data-answer="salah">Sumedang</button>
-        <button class="btn option" data-answer="benar">Bukan Kopo</button>
+<!-- ================= PAGE 3 ================= -->
+<section id="page3" class="page">
+  <div class="content">
+    <h1>Tempat apa yang barusan dikunjungi?</h1>
+    <button class="btn option" data-answer="salah">Sumedang</button>
+    <button class="btn option" data-answer="benar">Bukan Kopo</button>
+    <p id="feedback"></p>
+  </div>
+</section>
+
+<!-- ================= PAGE 4 ================= -->
+<section id="page4" class="page">
+  <div class="content">
+    <h1>Ya emang bukan Kopo 😌</h1>
+    <button class="btn">NEXT</button>
+  </div>
+</section>
+
+<!-- ================= PAGE 5 ================= -->
+<section id="page5" class="page">
+  <div class="content">
+    <h1>Nah ini hasilnya</h1>
+    <button class="btn danger">NEXT</button>
+  </div>
+</section>
+
+<!-- ================= PAGE 6 ================= -->
+<section id="page6" class="page">
+  <div class="content">
+    <h1>Welcome</h1>
+    <p>Tergila-gila sama aku 💗</p>
+    <button class="btn">NEXT</button>
+  </div>
+</section>
+
+<!-- ================= PAGE 7 ================= -->
+<section id="page7" class="page">
+  <div class="content">
+
+    <h1>Kenangan Kita 💗</h1>
+
+    <!-- SLIDER FOTO -->
+    <div class="slider">
+      <div class="slides">
+        <img src="assets/img/kenangan1.jpg">
+        <img src="assets/img/kenangan2.jpg">
+        <img src="assets/img/kenangan3.jpg">
       </div>
-      <p id="feedback"></p>
     </div>
-  </section>
 
-  <!-- ================= PAGE 4 ================= -->
-  <!-- Pengakuan -->
-  <section id="page4" class="page">
-    <div class="content">
-      <h1>
-        Lah GAK TERIMA?KAN EMANG BUKAN KOPO<br />
-        kalau Kopo itu pelosok dan macet pisan 
-      </h1>
-      <button class="btn">NEXT</button>
+    <!-- VIDEO 3 KOLOM -->
+    <div class="video-wrapper three-column">
+      <video controls src="assets/video/video1.mp4"></video>
+      <video controls src="assets/video/video2.mp4"></video>
+      <video controls src="assets/video/video3.mp4"></video>
     </div>
-  </section>
 
-  <!-- ================= PAGE 5 ================= -->
-  <!-- Larangan Kedua -->
-  <section id="page5" class="page">
-    <div class="content">
-      <h1>Nah ini hasilnya</h1>
-      <p> yang bisa buat nanti kamu bisa gila 😤</p>
-      <button class="btn danger">NEXT</button>
+    <button class="btn">NEXT</button>
+  </div>
+</section>
+
+<!-- ================= PAGE 8 ================= -->
+<section id="page8" class="page">
+  <div class="content">
+    <h1>I LOVE YOU 💗</h1>
+
+    <!-- KOMENTAR -->
+    <div class="comment-box">
+      <input id="username" placeholder="Nama kamu">
+      <textarea id="comment" placeholder="Tulis komentar..."></textarea>
+      <button class="btn" onclick="addComment()">Kirim</button>
+      <div id="commentList"></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ================= PAGE 6 ================= -->
-  <!-- Gila Tapi Romantis -->
-  <section id="page6" class="page">
-    <div class="content">
-      <h1>Welcome</h1>
-      <h2>Selamat jadi gila</h2>
-      <p>Tergila-gila sama aku maksudnya wkwk 💗</p>
-      <button class="btn">NEXT</button>
-    </div>
-  </section>
-
-  <!-- ================= PAGE 7 ================= -->
-  <!-- Galeri Foto & Video -->
-  <section id="page7" class="page">
-    <div class="content">
-      <h1>Gipapapapa</h1>
-
-      <!-- Foto Slider -->
-      <div class="slider">
-        <div class="slides">
-          <img src="assets/img/kenangan1.jpg" />
-          <img src="assets/img/kenangan2.jpg" />
-          <img src="assets/img/kenangan3.jpg" />
-          <img src="assets/img/kenangan4.jpg" />
-          <img src="assets/img/kenangan5.jpg" />
-          <img src="assets/img/kenangan6.jpg" />
-          <img src="assets/img/kenangan7.jpg" />
-          <img src="assets/img/kenangan8.jpg" />
-          <img src="assets/img/kenangan9.jpg" />
-          <img src="assets/img/kenangan10.jpg" />
-          <img src="assets/img/kenangan11.jpg" />
-          <img src="assets/img/kenangan12.jpg" />
-          <img src="assets/img/kenangan13.jpg" />
-        </div>
-      </div>
-
-      <!-- Video -->
-      <div class="video-wrapper">
-        <video controls>
-          <source src="assets/video/video1.mp4" type="video/mp4" />
-          <source src="assets/video/video2.mp4" type="video/mp4" />
-          Browser kamu tidak mendukung video.
-        </video>
-      </div>
-
-      <button class="btn">NEXT</button>
-    </div>
-  </section>
-
-  <!-- ================= PAGE 8 ================= -->
-  <!-- Penutup -->
-  <section id="page8" class="page">
-    <div class="content">
-      <h1 class="love-text">I LOVE YOU 💗</h1>
-      <h2>Gifarini Dwinanty </h2>
-    </div>
-  </section>
-
-  <!-- JavaScript -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
-
-
-
