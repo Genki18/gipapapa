@@ -1,54 +1,168 @@
-let currentPage = 1;
-
-function showPage(n) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(`page${n}`).classList.add('active');
-  currentPage = n;
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('btn') && !e.target.classList.contains('option')) {
-    showPage(currentPage + 1);
-  }
-});
+body {
+  font-family: 'Poppins', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
+  color: #ffffff;
+  overflow-x: hidden;
+}
 
-document.querySelectorAll('.option').forEach(btn => {
-  btn.onclick = () => {
-    if (btn.dataset.answer === 'benar') {
-      showPage(4);
-    } else {
-      document.getElementById('feedback').innerText = 'Salah 😭';
-    }
-  };
-});
+.page {
+  min-height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
 
-// MUSIC
-const bgMusic = document.getElementById('bgMusic');
-document.addEventListener('click', () => {
-  bgMusic.play().catch(()=>{});
-}, { once:true });
+.page.active {
+  display: flex;
+  animation: fadeIn 1s ease-in-out;
+}
 
-// SLIDER
-const slides = document.querySelector('.slides');
-const imgs = document.querySelectorAll('.slides img');
-let index = 0;
+.content {
+  max-width: 700px;
+  width: 100%;
+}
 
-setInterval(() => {
-  index = (index + 1) % imgs.length;
-  slides.style.transform = `translateX(-${index * 100}%)`;
-}, 3000);
+/* ================= TEXT ================= */
+h1 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+}
 
-// KOMENTAR
-function addComment() {
-  const name = username.value;
-  const text = comment.value;
-  if (!name || !text) return;
+h2 {
+  font-size: 1.6rem;
+  margin: 10px 0;
+}
 
-  const div = document.createElement('div');
-  div.className = 'comment-item';
-  div.innerHTML = `<b>${name}</b><br>${text}`;
-  commentList.prepend(div);
+p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
 
-  username.value = '';
-  comment.value = '';
+.love-text {
+  font-size: 3rem;
+  color: #fff;
+  animation: pulse 1.2s infinite;
+}
+
+/* ================= BUTTON ================= */
+.btn {
+  padding: 14px 30px;
+  border-radius: 30px;
+  border: none;
+  background: linear-gradient(45deg, #ff4d6d, #ff758f);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.danger {
+  animation: shake 0.8s infinite;
+}
+
+/* ================= OPTIONS ================= */
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* ================= GALLERY ================= */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 18px;
+  transition: 0.4s;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+.gallery img:hover {
+  transform: scale(1.08) rotate(1deg);
+}
+
+/* ================= SLIDER ================= */
+.slider {
+  width: 100%;
+  max-width: 600px;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+}
+
+.slides {
+  display: flex;
+  transition: transform 1s ease-in-out;
+}
+
+.slides img {
+  .slides img {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  display: block;
+  border-radius: 20px;
+}
+
+/* ================= VIDEO ================= */
+.video-wrapper video {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(2deg); }
+  50% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  .love-text { font-size: 2.5rem; }
+  .btn { padding: 12px 24px; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.7rem; }
+  p { font-size: 1rem; }
 }
