@@ -1,168 +1,123 @@
-/* ================= GLOBAL ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+// ================= GLOBAL STATE =================
+let currentPage = 1;
+
+// ================= PAGE NAVIGATION =================
+function showPage(pageNumber) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+
+  const target = document.getElementById(`page${pageNumber}`);
+  if (target) {
+    target.classList.add('active');
+    currentPage = pageNumber;
+  }
 }
 
-body {
-  font-family: 'Poppins', 'Arial', sans-serif;
-  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb);
-  color: #ffffff;
-  overflow-x: hidden;
+// ================= BUTTON NEXT =================
+document.addEventListener('click', function (e) {
+  if (e.target.classList.contains('btn')) {
+    const parentPage = e.target.closest('.page');
+    if (!parentPage) return;
+
+    const pageId = parentPage.id.replace('page', '');
+
+    // Page 3 handled separately (question)
+    if (parentPage.id === 'page3') return;
+
+    // Default next page
+    const next = parseInt(pageId) + 1;
+    showPage(next);
+  }
+});
+
+// ================= QUESTION LOGIC =================
+const options = document.querySelectorAll('.option');
+const feedback = document.getElementById('feedback');
+
+options.forEach(option => {
+  option.addEventListener('click', () => {
+    const answer = option.dataset.answer;
+
+    if (answer === 'benar') {
+      showPage(4);
+    } else {
+      feedback.innerText = 'Lah kok Cileunyi 😭 jelas-jelas Kopo!';
+      feedback.style.color = '#ffe066';
+      feedback.style.animation = 'shake 0.5s';
+
+      setTimeout(() => {
+        feedback.style.animation = '';
+      }, 500);
+    }
+  });
+});
+
+// ================= FIRST BUTTON (WARNING) =================
+const warningBtn = document.getElementById('btn-warning');
+if (warningBtn) {
+  warningBtn.addEventListener('click', () => {
+    showPage(2);
+  });
 }
 
-.page {
-  min-height: 100vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 40px 20px;
+// ================= INIT =================
+showPage(1);
+
+// ================= LOVE FALL EFFECT =================
+function createLove() {
+  const love = document.createElement('div');
+  love.innerHTML = '💗';
+  love.style.position = 'fixed';
+  love.style.left = Math.random() * 100 + 'vw';
+  love.style.top = '-30px';
+  love.style.fontSize = Math.random() * 20 + 20 + 'px';
+  love.style.animation = 'loveFall 4s linear forwards';
+  love.style.zIndex = '9999';
+  document.body.appendChild(love);
+
+  setTimeout(() => {
+    love.remove();
+  }, 4000);
 }
 
-.page.active {
-  display: flex;
-  animation: fadeIn 1s ease-in-out;
+setInterval(createLove, 500);
+
+// Inject CSS animation for falling love
+const style = document.createElement('style');
+style.innerHTML = `
+@keyframes loveFall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}`;
+document.head.appendChild(style);
+
+// ================= BACKGROUND MUSIC (bgMusic) =================
+const bgMusic = document.getElementById('bgMusic');
+
+function playMusic() {
+  if (!bgMusic) return;
+  bgMusic.volume = 0.5;
+  bgMusic.play().catch(() => {});
+  document.removeEventListener('click', playMusic);
+  document.removeEventListener('scroll', playMusic);
 }
 
-.content {
-  max-width: 700px;
-  width: 100%;
-}
+document.addEventListener('click', playMusic);
+document.addEventListener('scroll', playMusic);
 
-/* ================= TEXT ================= */
-h1 {
-  font-size: 2.4rem;
-  margin-bottom: 20px;
-}
+// ================= SLIDER AUTO =================
+const slides = document.querySelector('.slides');
+const images = document.querySelectorAll('.slides img');
+let index = 0;
 
-h2 {
-  font-size: 1.6rem;
-  margin: 10px 0;
-}
-
-p {
-  font-size: 1.1rem;
-  margin-bottom: 25px;
-}
-
-.love-text {
-  font-size: 3rem;
-  color: #fff;
-  animation: pulse 1.2s infinite;
-}
-
-/* ================= BUTTON ================= */
-.btn {
-  padding: 14px 30px;
-  border-radius: 30px;
-  border: none;
-  background: linear-gradient(45deg, #ff4d6d, #ff758f);
-  color: #fff;
-  font-size: 1rem;
-  cursor: pointer;
-  margin: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-.danger {
-  animation: shake 0.8s infinite;
-}
-
-/* ================= OPTIONS ================= */
-.options {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* ================= GALLERY ================= */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  margin: 30px 0;
-}
-
-.gallery img {
-  width: 100%;
-  border-radius: 18px;
-  transition: 0.4s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
-}
-
-.gallery img:hover {
-  transform: scale(1.08) rotate(1deg);
-}
-
-/* ================= SLIDER ================= */
-.slider {
-  width: 100%;
-  max-width: 600px;
-  margin: 30px auto;
-  overflow: hidden;
-  border-radius: 25px;
-  box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
-}
-
-.slides {
-  display: flex;
-  transition: transform 1s ease-in-out;
-}
-
-.slides img {
-  .slides img {
-  width: 100%;
-  height: auto;
-  flex-shrink: 0;
-  display: block;
-  border-radius: 20px;
-}
-
-/* ================= VIDEO ================= */
-.video-wrapper video {
-  width: 100%;
-  max-width: 500px;
-  border-radius: 20px;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
-}
-
-/* ================= ANIMATION ================= */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-
-@keyframes shake {
-  0% { transform: rotate(0); }
-  25% { transform: rotate(2deg); }
-  50% { transform: rotate(-2deg); }
-  75% { transform: rotate(2deg); }
-  100% { transform: rotate(0); }
-}
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 768px) {
-  h1 { font-size: 2rem; }
-  .love-text { font-size: 2.5rem; }
-  .btn { padding: 12px 24px; }
-}
-
-@media (max-width: 480px) {
-  h1 { font-size: 1.7rem; }
-  p { font-size: 1rem; }
+if (slides && images.length > 0) {
+  setInterval(() => {
+    index++;
+    if (index >= images.length) {
+      index = 0;
+    }
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }, 3000); // ganti tiap 3 detik
 }
